@@ -5,6 +5,41 @@
     <title>jogo</title>
 
     <style>
+#canvas01 {
+  border: 1px solid black;
+}
+
+#btnesquerda {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  top: 360px;
+  left: -60px;
+}
+
+#btndireita {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  top: 360px;
+  left: 180px;
+}
+
+#btncima {
+  width: 160px;
+  height: 140px;
+  position: absolute;
+  top: 280px;
+  left: 80px;
+}
+
+#btnbaixo {
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 380px;
+    left: 60px;
+}
 
     </style>
 
@@ -22,6 +57,203 @@
   <img src="btn baixo.png" id="btnbaixo" onclick="movementyy()">
 
     <script>
+var canvas = document.getElementById("canvas01")
+var ctx = canvas.getContext("2d")
+
+var colidiu = 0
+
+var html = innerHTML = `
+    <p id="txt">game over</p>
+    
+    <style>
+      #txt {
+        color: red;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+    </style>
+    
+    `
+
+var cor1 = "green"
+var cor2 = "red"
+
+var w = 50
+var h = 50
+
+var pos_x = 300 - w
+var pos_y = 300 - h
+
+var pos_x_i = 0
+var pos_y_i = 0
+
+ctx.fillStyle = cor1
+ctx.fillRect(pos_x, pos_y, w, h)
+
+ctx.fillStyle = cor2
+ctx.fillRect(pos_x_i,pos_y_i,w,h)
+
+//document.addEventListener("touchstart", movement)
+
+function movementx()
+{
+  
+  if(pos_x == pos_x_i && pos_y == pos_y_i)
+  { 
+    
+    colidiu = 1
+    inimigo()
+    
+  }
+  
+  ctx.clearRect(pos_x, pos_y,w,h)
+  
+  if(pos_x > 0)
+  {
+    pos_x += -w
+  }
+  else
+  {
+    pos_x = 300 - w
+  }
+  
+  ctx.fillStyle = cor1
+  ctx.fillRect(pos_x, pos_y, w, h)
+
+  inimigo()
+}
+
+function movementxx()
+{
+  
+  if(pos_x == pos_x_i && pos_y == pos_y_i)
+  { 
+    
+    colidiu = 1
+    inimigo()
+    
+  }
+  
+  ctx.clearRect(pos_x, pos_y,w,h)
+  
+  if(pos_x < 300 - w)
+  {
+    pos_x += w
+  }
+  else
+  {
+    pos_x = 0
+  }
+  
+  ctx.fillStyle = cor1
+  ctx.fillRect(pos_x, pos_y, w, h)
+  
+  inimigo()
+}
+
+function movementy()
+{
+  
+  if(pos_x == pos_x_i && pos_y == pos_y_i)
+  { 
+    
+    colidiu = 1
+    inimigo()
+    
+  }
+  
+  ctx.clearRect(pos_x, pos_y,w,h)
+  
+  if(pos_y > 0)
+  {
+    pos_y -= h
+  }
+  else
+  {
+    pos_y = 300 - h
+  }
+  
+  ctx.fillStyle = cor1
+  ctx.fillRect(pos_x, pos_y, w, h)
+  
+  inimigo()
+}
+
+function movementyy()
+{
+  
+  if(pos_x == pos_x_i && pos_y == pos_y_i)
+  { 
+    
+    colidiu = 1
+    inimigo()
+    
+  }
+  
+  ctx.clearRect(pos_x, pos_y,w,h)
+  
+  if(pos_y < 300 - h)
+  {
+    pos_y += h
+  }
+  else
+  {
+    pos_y = 0
+  }
+  
+  ctx.fillStyle = cor1
+  ctx.fillRect(pos_x, pos_y, w, h)
+  
+  inimigo()
+}
+
+function inimigo()
+{
+  if(pos_x == pos_x_i && pos_y == pos_y_i)
+  { 
+    
+    colidiu = 1
+    
+  }
+  
+  if(pos_x_i + w == pos_y + h && pos_y_i + h == pos_x + w)
+  {
+    
+    colidiu = 1
+    
+  }
+  
+  if(colidiu == 1)
+  {
+    document.write(html)
+  }
+  else
+  {
+    ctx.clearRect(pos_x_i,pos_y_i,w,h)
+  }
+  
+  if(pos_x_i < pos_x)
+  {
+    pos_x_i += w
+  }
+  if(pos_x_i > pos_x)
+  {
+    pos_x_i -= w
+  }
+  if(pos_y_i < pos_y)
+  {
+    pos_y_i += h
+  }
+  if(pos_y_i > pos_y)
+  (
+    pos_y_i -= h
+  )
+  
+  ctx.fillStyle = cor2
+  ctx.fillRect(pos_x_i,pos_y_i,w,h)
+}
 
     </script>
   </body>
